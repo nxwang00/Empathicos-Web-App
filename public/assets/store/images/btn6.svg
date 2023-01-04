@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="110.889" height="29.81" viewBox="0 0 110.889 29.81">
+  <defs>
+    <filter id="Trail" x="0" y="0" width="110.889" height="29.81" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#161614" flood-opacity="0.749"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Trail)">
+    <path id="Trail-2" data-name="Trail" d="M414.865,409.158c4.662-1.742,5.322-5.432,11.311-6.518,9.508-1.723,4.02-11.245,9.8-10.136s2.89,5.634,2.206,8.517,10.678,3.27,14.359,1.619,5.667-3.652,11.44-4.043,14.676,4.969,21.407,2.713,13.8-7.306,18.426-6.239-3.065,1.895-1.824,3.525.393-.709,6.942,4.043,4.983,5.85-6.942,6.518-20.153.589-20.153.589-15.662-.383-20.615-.589-11.139,1.1-17.637.911-8.51.433-13.647,0S409.9,411.013,414.865,409.158Z" transform="translate(-407.87 -386.42)" fill="#fff" opacity="0.24"/>
+  </g>
+</svg>

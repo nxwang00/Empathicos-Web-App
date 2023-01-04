@@ -1,0 +1,7 @@
+DB_USERNAME=andreapl_webapp
+DB_PASSWORD=eRB%$&2+^31l
+
+{
+    "device_id": "494c20832da3d28c",
+    "device_token": "cl0roabvQ_yjhPzI9kBx1A:APA91bHb-H2ujYOFjEAoE2zltzS8kv114hNMHl-cltOj-1AsYcxVKd_Nv1Pyq_b4TTCu5uOYuj64nMUqFzJasEivQZnbWZmA2xrLKFcEM7yve2K12Bl59PhgPoxc82xbPw_V-IwFobvg"
+}

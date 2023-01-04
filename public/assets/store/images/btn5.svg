@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="127.875" height="28.052" viewBox="0 0 127.875 28.052">
+  <defs>
+    <filter id="Trail" x="0" y="0" width="127.875" height="28.052" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#161615" flood-opacity="0.749"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Trail)">
+    <path id="Trail-2" data-name="Trail" d="M403.74,389.885c0-.105.111.66,2.448.56.549-.023,10.177-.7,13.468-2.288,3.09-1.492-.227-9.8,3.745-10.726a30.336,30.336,0,0,1,14.881.017c3.832.958,1.923,4.845,1.473,7.322s7.087,2.82,9.526,1.4,5.65-3.675,9.74-4.081,3.8,2.1,3.8,2.1a21.38,21.38,0,0,1,8.509-1.78c4.281.167,3.971,2.993,7.8,2.662s6.435-2.686,10.9-4.619,9.407-3.348,12.477-2.427-.066,1.97.76,3.372,8.3.48,14.269,2.474-2.033,7.694-9.943,8.257-18.435.206-18.435.206L469,392.26s-10.67-.295-13.956-.476-7.388.938-11.7.767-5.914-2.175-9.321-2.552-11.343.331-15.877.008S403.788,391.792,403.74,389.885Z" transform="translate(-397.74 -370.52)" fill="#fff" opacity="0.24"/>
+  </g>
+</svg>
