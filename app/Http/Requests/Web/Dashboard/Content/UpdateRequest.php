@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Template;
+namespace App\Http\Requests\Web\Dashboard\Content;
 
-use App\Template;
+use App\Content;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
 
 class UpdateRequest extends FormRequest
 {
-    // private $template;
+    protected $content;
 
     /**
      * Determine if the Template is authorized to make this request.
@@ -59,7 +59,7 @@ class UpdateRequest extends FormRequest
         ];
     }
 
-    public function persist(): self
+    public function persist($content): self
     {
         // $this->template->delete();
 
@@ -70,7 +70,7 @@ class UpdateRequest extends FormRequest
         //     $this->data()
         // );
 
-        $this->template->update($this->data());
+        $this->content = $content->update($this->data());
 
         return $this;
     }
@@ -158,24 +158,24 @@ class UpdateRequest extends FormRequest
         if ($this->hasFile($file_name)) {
             //delete old file...
             if ($file_name == 'second_image' && $this->old_second_image) {
-                Storage::delete('public/templates/' . $this->old_second_image);
+                Storage::delete('public/contents/' . $this->old_second_image);
             }
             if ($file_name == 'image' && $this->old_image) {
-                Storage::delete('public/templates/' . $this->old_image);
+                Storage::delete('public/contents/' . $this->old_image);
             }
 
             $filenameWithExt = $this->file($file_name)->getClientOriginalName();
             $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension       = $this->file($file_name)->getClientOriginalExtension();
             $image_name      = time() . rand(10, 100) . '.' . $extension;
-            $path            = $this->file($file_name)->move('storage/templates', $image_name);
+            $path            = $this->file($file_name)->move('storage/contents', $image_name);
             return $image_name;
         }
         return $this->old_image;
     }
 
-    public function getTemplate(): Template
+    public function getTemplate()
     {
-        return $this->template;
+        return $this->content;
     }
 }

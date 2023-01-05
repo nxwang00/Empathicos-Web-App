@@ -14,7 +14,7 @@
                 <li class="submenu" >
                     <a href="#" {!!(request()->is('admin/badge-categories/*') || request()->routeIs('admin.badge-categories.index') || request()->routeIs('admin.badge-categories.create') || request()->routeIs('admin.main-categories.create') || request()->routeIs('admin.main-categories.index') || request()->routeIs('admin.main-subcategories.create') || request()->routeIs('admin.main-subcategories.index') ) ? 'class="subdrop"' : ''!!} ><i class="la la-bars"></i> <span> Categories </span> <span class="menu-arrow"></span></a>
                     <ul  {!!(request()->is('admin/badge-categories/*') || request()->routeIs('admin.badge-categories.index') || request()->routeIs('admin.badge-categories.create') || request()->routeIs('admin.main-categories.create') || request()->routeIs('admin.main-categories.index') || request()->routeIs('admin.main-subcategories.create') || request()->routeIs('admin.main-subcategories.index'))  ? 'style="display: block;"' : ''!!} >
-                       
+
                         <li {!! is_active('admin.badge-categories.index') !!}>
                             <a href="{{route('admin.badge-categories.index')}}"> All Categories </a>
                         </li>
@@ -26,8 +26,8 @@
                 <li {!! is_active('admin.main-categories.index') !!}>
                         <a href="{{route('admin.main-categories.index')}}"><i class="la la-mobile"></i> <span>Categories<small>(App Dashboard)</small></a>
                 </li>
-                 <li {!! is_active('admin.main-subcategories.index') !!}>
-                        <a href="{{route('admin.main-subcategories.index')}}"><i class="la la-cubes"></i> <span>Sub Categories<small>(App)</small></a>
+                <li {!! is_active('admin.main-subcategories.index') !!}>
+                    <a href="{{route('admin.main-subcategories.index')}}"><i class="la la-cubes"></i> <span>Sub Categories<small>(App)</small></a>
                 </li>
                 <li class="submenu" >
                     <a href="#" {!!( request()->is('admin/templates/*') || request()->routeIs('admin.templates.index') || request()->routeIs('admin.templates.create')) ? 'class="subdrop"' : ''!!} ><i class="la la-th-list"></i> <span> Templates </span> <span class="menu-arrow"></span></a>
@@ -37,6 +37,17 @@
                         </li>
                         <li {!! is_active('admin.templates.create') !!}>
                             <a href="{{route('admin.templates.create')}}"> Add New </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="submenu" >
+                    <a href="#" {!!( request()->is('admin/contents/*') || request()->routeIs('admin.contents.index') || request()->routeIs('admin.contents.create')) ? 'class="subdrop"' : ''!!} ><i class="la la-th-list"></i> <span> Contents<small>(App)</small></span> <span class="menu-arrow"></span></a>
+                    <ul  {!!(request()->is('admin/contents/*') || is_route('admin.contents.index') || is_route('admin.contents.create')) ? 'style="display: block;"' : ''!!} >
+                        <li {!! is_active('admin.contents.index') !!}>
+                            <a href="{{route('admin.contents.index')}}"> All Contents </a>
+                        </li>
+                        <li {!! is_active('admin.contents.create') !!}>
+                            <a href="{{route('admin.contents.create')}}"> Add New </a>
                         </li>
                     </ul>
                 </li>
@@ -64,7 +75,7 @@
                     <a href="{{route('admin.reviews.index')}}"><i class="la la-crosshairs"></i> <span> Reviews</span></a>
                 </li>
                 <!--Audio Course--->
-                
+
                 <li class="menu-title">
                     <span>Audio Courses</span>
                 </li>
@@ -74,10 +85,10 @@
                 <li  {!! is_active('admin.audio-course-category.index') !!}>
                     <a href="{{route('admin.audio-course-category.index')}}"><i class="la la-sitemap"></i> <span> Audio Course Categories</span></a>
                 </li>
-                
+
                 <!--Audio Course--->
-                
-                
+
+
                 <li class="menu-title" sr-only="Badges">
                     <span sr-only="Badges">Characters</span>
                 </li>
@@ -116,7 +127,7 @@
                     </ul>
                 </li>
                 --}}
-                
+
                 <li class="menu-title">
                     <span>Site</span>
                 </li>
@@ -132,18 +143,18 @@
                 <li {!! is_active('admin.feedbacks.index') !!}>
                     <a href="{{route('admin.feedbacks.index')}}"><i class="la la-search"></i> <span> Feedbacks</span></a>
                 </li>
-                
+
                 <li class="menu-title">
                     <span>Administration</span>
                 </li>
                 <li  {!!( request()->is('admin/users') || request()->routeIs('admin.users.index') || request()->routeIs('admin.users.create')) ? 'class="active"' : ''!!} >
                     <a href="{{route('admin.users.index')}}"><i class="la la-crosshairs"></i> <span> Users</span></a>
                 </li>
-                
+
                 <li  {!!( request()->is('admin/users/notification') || request()->routeIs('admin.users.notificationcreate') || request()->routeIs('admin.users.notificationcreate')) ? 'class="active"' : ''!!} >
                     <a href="{{route('admin.users.notificationcreate')}}"><i class="la la-bell"></i> <span> App Notification</span></a>
                 </li>
-                
+
                 <li {!! is_active('admin.settings.index') !!}>
                     <a href="{{route('admin.settings.index')}}"><i class="la la-cog"></i> <span> Settings</span></a>
                 </li>

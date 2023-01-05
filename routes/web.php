@@ -94,7 +94,7 @@ Route::group(['namespace' => 'Web\Store',], function () {
             Route::get('product/{id}', 'ProductController@show')->name('product.show');
         });
 
-       
+
         /**
         |-----------------------------------------------
         | Faq Routes.......
@@ -125,7 +125,7 @@ Route::group(['namespace' => 'Web\Store',], function () {
         Route::group(['namespace' => 'Invitation'], function () {
             Route::get('invitation/accept/{id}', 'InvitationController@accept')->name('invitation.accept');
         });
-        
+
         /**
         |-----------------------------------------------
         | Badge Routes.......
@@ -137,7 +137,7 @@ Route::group(['namespace' => 'Web\Store',], function () {
             Route::get('character-templates/{id}/show', 'BadgeController@templates')->name('badge.templates.show');
             Route::post('characters/favorites/{id}', 'BadgeController@favorites')->name('badges.favorites');
         });
-        
+
         /**
         |-----------------------------------------------
         | Favorite Routes.......
@@ -146,7 +146,7 @@ Route::group(['namespace' => 'Web\Store',], function () {
         Route::group(['namespace' => 'Favorite'], function () {
             Route::get('favorites', 'FavoriteController@index')->name('favorites');
         });
-        
+
         /**
         |-----------------------------------------------
         | Authentication Routes.......
@@ -326,7 +326,7 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
     Route::group(['namespace' => 'User'], function () {
         Route::post('users/status/{user}', 'UserController@status')->name('users.status');
         Route::resource('users', 'UserController');
-        
+
         Route::get('users/notification/create', 'UserController@notificationView')->name('users.notificationcreate');
         Route::post('users/notification/store', 'UserController@sendPushNotification')->name('users.notificationstore');
     });
@@ -437,6 +437,17 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
 
     /**
     |-----------------------------------------------
+    | Content Routes.......
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Content'], function () {
+        Route::post('contents/get', 'ContentController@get')->name('contents.get');
+        Route::resource('contents', 'ContentController');
+        Route::get('contents/categories/{main_cat_id}', 'ContentController@getCategoriesByMain')->name('contents.categories.main');
+    });
+
+    /**
+    |-----------------------------------------------
     | Feedback Routes.......
     |-----------------------------------------------
      */
@@ -463,9 +474,9 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
         Route::get('settings', 'SettingController@index')->name('settings.index');
         Route::post('settings/update', 'SettingController@update')->name('settings.update');
     });
-    
-    
-    
+
+
+
     /**
     |-----------------------------------------------
     | Main Category Routes.......
@@ -477,8 +488,8 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
         Route::resource('main-categories', 'MainCategoryController');
         Route::post('main-categories/update', 'MainCategoryController@updatedata')->name('main-categories.update');
     });
-    
-    
+
+
      /**
     |-----------------------------------------------
     | Main Sub Category Routes.......
@@ -490,9 +501,9 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
         Route::resource('main-subcategories', 'MainsubcategoryController');
         Route::post('main-categories/updatedata', 'MainsubcategoryController@updatedata')->name('main-subcategories.updatedata');
     });
-    
-    
-    
+
+
+
          /**
     |-----------------------------------------------
     | Audio course......
@@ -504,7 +515,7 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
         Route::resource('audio-course', 'AudiocourseController');
         Route::post('audio-course/updatedata', 'AudiocourseController@updatedata')->name('audio-courses.updatedata');
     });
-    
+
           /**
     |-----------------------------------------------
     | Audio course category......
@@ -516,9 +527,9 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
         Route::resource('audio-course-category', 'AudiocategoryController');
         Route::post('audio-course-category/updatedata', 'AudiocategoryController@updatedata')->name('audio-course-category.updatedata');
     });
-    
-    
-    
+
+
+
 });
 
 // Route::get('setup-fresh', function () {
@@ -536,7 +547,7 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
 Route::get('send-test-mail', function () {
 
     // return new \App\Mail\TestMail();
-   
+
     \Mail::to('ajay.lowanshi@thedetmail.com', 'Developer')
             //->cc('bhaskar@digitalelitellp.com', 'Sr Developer')
             ->send(new \App\Mail\TestMail());

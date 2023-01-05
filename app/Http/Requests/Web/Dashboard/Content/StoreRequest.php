@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Template;
+namespace App\Http\Requests\Web\Dashboard\Content;
 
-use App\Template;
+use App\Content;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Storage;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
-    // private $template;
+    private $template;
 
     /**
      * Determine if the Template is authorized to make this request.
@@ -32,7 +31,6 @@ class UpdateRequest extends FormRequest
             'field'    => 'required|string|max:255',
             'category' => 'required|string|max:255',
         ];
-
     }
 
     /**
@@ -61,16 +59,13 @@ class UpdateRequest extends FormRequest
 
     public function persist(): self
     {
-        // $this->template->delete();
-
+        $this->template = Content::create($this->data());
         // $this->template = Template::updateOrCreate([
         //         'category_id' => $this->input('category'),
         //         'field'       => $this->input('field')
         //     ],
         //     $this->data()
         // );
-
-        $this->template->update($this->data());
 
         return $this;
     }
@@ -154,27 +149,19 @@ class UpdateRequest extends FormRequest
 
     protected function storeFilesIfExists($file_name = ''): string
     {
-        //delete old file & template...
         if ($this->hasFile($file_name)) {
-            //delete old file...
-            if ($file_name == 'second_image' && $this->old_second_image) {
-                Storage::delete('public/templates/' . $this->old_second_image);
-            }
-            if ($file_name == 'image' && $this->old_image) {
-                Storage::delete('public/templates/' . $this->old_image);
-            }
-
             $filenameWithExt = $this->file($file_name)->getClientOriginalName();
             $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension       = $this->file($file_name)->getClientOriginalExtension();
             $image_name      = time() . rand(10, 100) . '.' . $extension;
-            $path            = $this->file($file_name)->move('storage/templates', $image_name);
+            $path            = $this->file($file_name)->storeAs('public/contents', $image_name);
             return $image_name;
         }
-        return $this->old_image;
+
+        return 'default.png';
     }
 
-    public function getTemplate(): Template
+    public function getTemplate(): Content
     {
         return $this->template;
     }
