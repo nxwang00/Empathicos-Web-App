@@ -40,13 +40,13 @@ class MaincatController extends Controller
 
     }
 
-     public function getSubCategories(Request $request, $cat_id){
+    public function getSubCategories(Request $request, $cat_id){
         $catArr = [];
 
         $cats = Mainsubcat::where('cat_id', $cat_id)->get();
 
         if($cats->isEmpty()){
-           return failedApiResponse('No data found.', null, 400);
+            return failedApiResponse('No data found.', null, 400);
         }
         if($cats){
             foreach($cats as $ct){
@@ -55,7 +55,7 @@ class MaincatController extends Controller
                     'title' => $ct->title,
                     'description' => $ct->description,
                     'cat_id' => $ct->cat_id,
-                    'image' => !empty($ct->image) ? asset('project/storage/app/public/main-subcategories/'.$ct->image) : '',
+                    'image' => !empty($ct->image) ? asset('/storage/main-subcategories/'.$ct->image) : '',
                     'created_at' => $ct->created_at
                 );
             }
@@ -64,4 +64,20 @@ class MaincatController extends Controller
         return failedApiResponse('No data found.', null, 400);
     }
 
+    public function getPersonalMessage()
+    {
+        $mainCat = Maincat::where('title', "Personal Message")->first();
+        $subCat = Mainsubcat::where('cat_id', $mainCat->id)->first();
+        if ($subCat) {
+            $rst = [];
+            $rst['id'] = $subCat->id;
+            $rst['title'] = $subCat->title;
+            $rst['description'] = $subCat->description;
+            $rst['image'] = !empty($subCat->image) ? asset('/storage/main-subcategories/'.$subCat->image) : '';
+            $rst['created_at'] = $subCat->created_at;
+
+            return successApiResponse('Personal Message Data', $rst, 200);
+        }
+        return failedApiResponse('No data found.', null, 400);
+    }
 }

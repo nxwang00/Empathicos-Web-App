@@ -202,6 +202,7 @@ Route::group(['namespace' => 'Api\Store\v1', 'middleware' => 'auth:api', 'prefix
     Route::group(['namespace' => 'MainCat'], function () {
         Route::get('dashboard-category', 'MaincatController@get')->name('maincat.get');
         Route::get('dashboard-subcategory/{cat_id}', 'MaincatController@getSubCategories')->name('mainsubcatcat.get');
+        Route::get('dashboard-category/personal-message', 'MaincatController@getPersonalMessage');
     });
 
      /**

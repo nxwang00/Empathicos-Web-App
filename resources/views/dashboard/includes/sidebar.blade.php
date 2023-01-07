@@ -40,17 +40,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="submenu" >
-                    <a href="#" {!!( request()->is('admin/contents/*') || request()->routeIs('admin.contents.index') || request()->routeIs('admin.contents.create')) ? 'class="subdrop"' : ''!!} ><i class="la la-th-list"></i> <span> Contents<small>(App)</small></span> <span class="menu-arrow"></span></a>
-                    <ul  {!!(request()->is('admin/contents/*') || is_route('admin.contents.index') || is_route('admin.contents.create')) ? 'style="display: block;"' : ''!!} >
-                        <li {!! is_active('admin.contents.index') !!}>
-                            <a href="{{route('admin.contents.index')}}"> All Contents </a>
-                        </li>
-                        <li {!! is_active('admin.contents.create') !!}>
-                            <a href="{{route('admin.contents.create')}}"> Add New </a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="menu-title">
                     <span>Products</span>
                 </li>

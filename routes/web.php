@@ -440,11 +440,11 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
     | Content Routes.......
     |-----------------------------------------------
      */
-    Route::group(['namespace' => 'Content'], function () {
-        Route::post('contents/get', 'ContentController@get')->name('contents.get');
-        Route::resource('contents', 'ContentController');
-        Route::get('contents/categories/{main_cat_id}', 'ContentController@getCategoriesByMain')->name('contents.categories.main');
-    });
+    // Route::group(['namespace' => 'Content'], function () {
+    //     Route::post('contents/get', 'ContentController@get')->name('contents.get');
+    //     Route::resource('contents', 'ContentController');
+    //     Route::get('contents/categories/{main_cat_id}', 'ContentController@getCategoriesByMain')->name('contents.categories.main');
+    // });
 
     /**
     |-----------------------------------------------
