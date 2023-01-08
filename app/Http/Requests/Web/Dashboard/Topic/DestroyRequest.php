@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Content;
+namespace App\Http\Requests\Web\Dashboard\Topic;
 
-use App\Mainsubcat;
-use App\Maincat;
-use App\Content;
+use App\Topic;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
-class CreateRequest extends FormRequest
+class DestroyRequest extends FormRequest
 {
 
     /**
@@ -56,13 +55,14 @@ class CreateRequest extends FormRequest
         ];
     }
 
-    public function getTemplate(): array
+    public function persist(): self
     {
-        return [
-            'main_categories' => Maincat::pluck('title', 'id'),
-            'categories' => Mainsubcat::pluck('title', 'id'),
-            'templates'  => Content::TYPES,
-        ];
+        $this->topic->delete();
+        return $this;
     }
 
+    public function getMsg(): array
+    {
+        return ['message' => 'The topic has been trashed successfully'];
+    }
 }

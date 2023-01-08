@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Content;
+namespace App\Http\Requests\Web\Dashboard\Topic;
 
-class IndexRequest
+use App\Mainsubcat;
+use App\Topic;
+use Illuminate\Foundation\Http\FormRequest;
+
+class EditRequest extends FormRequest
 {
 
     /**
@@ -48,6 +52,14 @@ class IndexRequest
     {
         return [
 
+        ];
+    }
+
+    public function getTopic(): array
+    {
+        return [
+            'topic'   => $this->topic,
+            'categories' => Mainsubcat::where('cat_id', 5)->pluck('title', 'id'),
         ];
     }
 }

@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', '| All Contents')
+@section('title', '| All Topics')
 @section('page-css-link')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('/assets/dashboard/css/dataTables.bootstrap4.min.css')}}">
@@ -14,17 +14,17 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="page-title"> All Contents </h3>
+                <h3 class="page-title"> All Topics </h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.app.dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.contents.index')}}">Contents</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.topics.index')}}">Topics</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        All Contents
+                        All Topics
                     </li>
                 </ul>
             </div>
             <div class="col-auto float-right ml-auto">
-                <a href="{{ route('admin.contents.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
+                <a href="{{ route('admin.topics.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
             </div>
         </div>
     </div>
@@ -41,18 +41,7 @@
         <div class="col-sm-6 col-md-3">
             <div class="form-group form-focus">
                 <input type="text" class="form-control floating" id="searchByKeyword">
-                <label class="focus-label">Template...</label>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="form-group form-focus select-focus">
-                <select class="select floating" id="searchByMainCategory">
-                    <option value="all"> -- Select Main Category -- </option>
-                    @foreach ($main_categories as $index => $main_category)
-                        <option value="{{$main_category->id}}">{{$main_category->title}}</option>
-                    @endforeach
-                </select>
-                <label class="focus-label">Main Category</label>
+                <label class="focus-label">Title...</label>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
@@ -76,13 +65,13 @@
                     <thead>
                         <tr>
                             <th>
-                                Image
-                            </th>
-                            <th>
-                                Template
+                                Title
                             </th>
                             <th>
                                 Description
+                            </th>
+                            <th>
+                                Category
                             </th>
                             <th width="15%">Action</th>
                         </tr>
@@ -135,7 +124,7 @@
             lengthMenu: [[30, 60, 120, -1], [30, 60, 120, "All"]],
             order: [[ 0, 'desc' ]],
             ajax:{
-                url: "{{ route('admin.contents.index') }}",
+                url: "{{ route('admin.topics.index') }}",
                 serverMethod: 'post',
                 data: function(data){
                     data.category = $('#searchByCategory').val();
@@ -144,33 +133,32 @@
             },
             columns:[
             {
-                data: 'image',
-                name: 'image',
+                data: 'title',
+                name: 'title',
                 orderable: false,
                 render: function(data, type, full, meta){
                     return `<h2 class="table-avatar-r">
-                        <a href="/admin/contents/`+full.id+`" class="avatar-r">
-                            <img src="{{ asset('/storage/contents') }}/`+ data + `" class="img-thumbnail" alt="No image Found" width="100" >
+                        <a href="/admin/topics/`+full.id+`" class="avatar-r">
+                            ${data}
                         </a>
                     </h2>`;
                 },
             },
             {
-                data: 'template',
-                name: 'template',
+                data: 'description',
+                name: 'description'
+            },
+            {
+                data: 'category',
+                name: 'category',
                 orderable: false,
                 render: function(data, type, full, meta){
                     return `<h2 class="table-avatar">
-                        <a href="/admin/contents/`+full.id+`"  >`
+                        <a href="/admin/topics/`+full.id+`"  >`
                             +full.category+`
-                           <span>Template: `+full.template+`</span>
                         </a>
                     </h2>`;
                 },
-            },
-            {
-                data: 'value',
-                name: 'value'
             },
             {
                 data: 'action',
@@ -191,21 +179,6 @@
         $('#searchByKeyword').keyup(function(){
             $('#admin_cards_table').DataTable().draw(true);
         });
-
-        // Updating the list of categories based on the selection of Main Category
-        $("#searchByMainCategory").on('change', function() {
-            let mainCategoryId = $("#searchByMainCategory").val();
-            $.get(`contents/categories/${mainCategoryId}`, categories => {
-                $('#searchByCategory').empty();
-                let ele = `<option value="all"> -- Select Category -- </option>`;
-                for (let category of categories) {
-                    ele += `
-                        <option value="${category.id}">${category.title}</option>
-                    `;
-                }
-                $('#searchByCategory').append(ele);
-            })
-        })
     });
 </script>
 @endsection

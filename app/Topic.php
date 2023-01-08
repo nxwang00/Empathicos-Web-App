@@ -4,24 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Content extends Model
+class Topic extends Model
 {
-    public const TYPES = [
-        '1' => 'First Templates',
-        '2' => 'Second Templates',
-        '3' => 'Third Templates',
-        '4' => 'Fourth Templates',
-        '5' => 'Fifth Templates',
-        '6' => 'Sixth Templates',
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'category_id', 'field', 'value',
+        'category_id', 'title', 'description',
     ];
 
     /**

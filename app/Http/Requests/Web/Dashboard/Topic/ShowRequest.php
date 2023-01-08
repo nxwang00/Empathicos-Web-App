@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Content;
+namespace App\Http\Requests\Web\Dashboard\Topic;
 
-use App\Content;
+use App\Topic;
 use App\Mainsubcat;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -55,11 +55,11 @@ class ShowRequest extends FormRequest
         ];
     }
 
-    public function getTemplate(): array
+    public function getTopic(): array
     {
         return [
-            'template'     => $this->template,
-            'category' => Mainsubcat::where('id', $this->template->category_id)->pluck('title')->implode(''),
+            'topic'     => $this->topic,
+            'category' => Mainsubcat::where('id', $this->topic->category_id)->pluck('title')->implode(''),
         ];
     }
 

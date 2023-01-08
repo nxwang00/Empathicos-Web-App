@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Content;
+namespace App\Http\Requests\Web\Dashboard\Topic;
 
-use App\Template;
-use Illuminate\Foundation\Http\FormRequest;
-
-class StatusRequest extends FormRequest
+class IndexRequest
 {
 
     /**
@@ -52,23 +49,5 @@ class StatusRequest extends FormRequest
         return [
 
         ];
-    }
-
-    public function persist(): self
-    {
-        $this->Template->update($this->data());
-        return $this;
-    }
-
-    protected function data(): array
-    {
-        return [
-            'status' => ($this->Template->status == 1) ? 2 : 1,
-        ];
-    }
-
-    public function getTemplate(): Template
-    {
-        return $this->Template;
     }
 }

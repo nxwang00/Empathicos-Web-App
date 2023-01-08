@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Content;
+namespace App\Http\Requests\Web\Dashboard\Topic;
 
-use App\Mainsubcat;
-use App\Content;
+use App\Topic;
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
+    private $topic;
 
     /**
      * Determine if the Template is authorized to make this request.
@@ -27,7 +28,8 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'title'    => 'required|string|max:255',
+            'category' => 'required|string|max:255',
         ];
     }
 
@@ -39,7 +41,7 @@ class EditRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'required' => 'The :attribute field is required.',
         ];
     }
 
@@ -55,12 +57,24 @@ class EditRequest extends FormRequest
         ];
     }
 
-    public function getTemplate($content): array
+    public function persist(): self
+    {
+        $this->topic = Topic::create($this->data());
+
+        return $this;
+    }
+
+    protected function data(): array
     {
         return [
-            'content'   => $content,
-            'categories' => Mainsubcat::pluck('title', 'id'),
-            'templates'  => Content::TYPES,
+            'category_id' => $this->input('category'),
+            'title'       => $this->input('title'),
+            'description' => $this->input('description'),
         ];
+    }
+
+    public function getTopic(): Topic
+    {
+        return $this->topic;
     }
 }

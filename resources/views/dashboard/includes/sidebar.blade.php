@@ -40,6 +40,17 @@
                         </li>
                     </ul>
                 </li>
+                <li class="submenu" >
+                    <a href="#" {!!( request()->is('admin/topics/*') || request()->routeIs('admin.topics.index') || request()->routeIs('admin.topics.create')) ? 'class="subdrop"' : ''!!} ><i class="la la-leanpub"></i> <span> Topics </span> <span class="menu-arrow"></span></a>
+                    <ul  {!!(request()->is('admin/topics/*') || is_route('admin.topics.index') || is_route('admin.topics.create')) ? 'style="display: block;"' : ''!!} >
+                        <li {!! is_active('admin.topics.index') !!}>
+                            <a href="{{route('admin.topics.index')}}"> All Topics </a>
+                        </li>
+                        <li {!! is_active('admin.topics.create') !!}>
+                            <a href="{{route('admin.topics.create')}}"> Add New </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu-title">
                     <span>Products</span>
                 </li>

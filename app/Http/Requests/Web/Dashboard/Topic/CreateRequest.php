@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Web\Dashboard\Content;
+namespace App\Http\Requests\Web\Dashboard\Topic;
 
-use App\Content;
+use App\Mainsubcat;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Storage;
 
-class DestroyRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
 
     /**
@@ -55,23 +54,11 @@ class DestroyRequest extends FormRequest
         ];
     }
 
-    public function persist($content): self
+    public function getTopic(): array
     {
-        $value = json_decode($content->value);
-
-        if (!empty($value->second_image)) {
-            Storage::delete('public/contents/' . $value->second_image);
-        }
-        if (!empty($value->image)) {
-            Storage::delete('public/contents/' . $value->image);
-        }
-
-        $content->delete();
-        return $this;
+        return [
+            'categories' => Mainsubcat::where('cat_id', 5)->pluck('title', 'id'),
+        ];
     }
 
-    public function getMsg(): array
-    {
-        return ['message' => 'The content has been trashed successfully'];
-    }
 }

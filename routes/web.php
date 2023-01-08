@@ -427,6 +427,16 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
 
     /**
     |-----------------------------------------------
+    | Topic Routes.......
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Topic'], function () {
+        Route::post('topics/get', 'TopicController@get')->name('topics.get');
+        Route::resource('topics', 'TopicController');
+    });
+
+    /**
+    |-----------------------------------------------
     | Template Routes.......
     |-----------------------------------------------
      */
