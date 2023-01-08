@@ -24,15 +24,15 @@ class MainsubcategoryController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-   
+
                             // $btn = viewButton('admin.main-categories', $row);
                             $btn = editButton('admin.main-subcategories', $row);
                             $btn .= trashButton('admin.main-subcategories', $row);
                             return $btn;
                     })
                     ->addColumn('description', function($row){
-   
-                           
+
+
                             return strip_tags($row->description);
                     })
                      ->addColumn('cat_id', function($row){
@@ -55,13 +55,13 @@ class MainsubcategoryController extends Controller
     {
         if($request->title == ""){
             flashWebResponse('error','Please enter the title');
-            return redirect()->back(); 
+            return redirect()->back();
         }
         if($request->cat_id == ""){
             flashWebResponse('error','Please select the category');
-            return redirect()->back(); 
+            return redirect()->back();
         }
-        
+
         if ($request->hasFile('image')) {
             $destinationPath = 'images';
             $filenameWithExt = $request->image->getClientOriginalName();
@@ -72,32 +72,35 @@ class MainsubcategoryController extends Controller
         } else {
             $avatar = '';
         }
-        
+
         $title = $request->title;
         $description = $request->description;
         $catId = $request->cat_id;
-        
+        $minicourse = $request->minicourse;
+
         $already = Mainsubcat::where('title', $title)->where('cat_id', $catId)->first();
         if($already){
             flashWebResponse('error','The title already exists');
-            return redirect()->back(); 
+            return redirect()->back();
         }
-        
+
         $mainCat = new Mainsubcat();
         $mainCat->title = $title;
         $mainCat->cat_id = $catId;
         $mainCat->description = $description;
         $mainCat->image = $avatar;
-        
+        if (!is_null($minicourse))
+            $mainCat->is_mini_course = true;
+
         $saveData = $mainCat->save();
         if($saveData){
             flashWebResponse('created', 'Sub Category created successfully!');
-            return redirect()->route('admin.main-subcategories.index');  
+            return redirect()->route('admin.main-subcategories.index');
         }
-        
+
         flashWebResponse('error','Data not saved');
-        return redirect()->back(); 
-        
+        return redirect()->back();
+
     }
 
     public function show(ShowRequest $request, BadgeCategory $badge_category)
@@ -116,13 +119,13 @@ class MainsubcategoryController extends Controller
     {
         if($request->title == ""){
             flashWebResponse('error','Please enter the title');
-            return redirect()->back(); 
+            return redirect()->back();
         }
         if($request->cat_id == ""){
             flashWebResponse('error','Please select the category');
-            return redirect()->back(); 
+            return redirect()->back();
         }
-        
+
         $mainCat = Mainsubcat::findOrFail($request->id);
         $mainCat->title = $request->title;
         $mainCat->cat_id = $request->cat_id;
@@ -138,19 +141,24 @@ class MainsubcategoryController extends Controller
             $avatar = $mainCat->image;
         }
         $mainCat->image = $avatar;
+        if (is_null($request->minicourse))
+            $mainCat->is_mini_course = NULL;
+        else
+            $mainCat->is_mini_course = true;
+
         $saveData = $mainCat->save();
         if($saveData){
             flashWebResponse('updated', 'Main Sub category');
-            return redirect()->route('admin.main-subcategories.index');  
+            return redirect()->route('admin.main-subcategories.index');
         }
-        
+
         flashWebResponse('error');
         return redirect()->back();
     }
 
     public function destroy($id)
     {
-        
+
         if (request()->ajax()) {
             $cat = Mainsubcat::findOrFail($id);
             if($cat){
@@ -170,7 +178,7 @@ class MainsubcategoryController extends Controller
     }
 
     public function templates(Request $request, BadgeCategory $badge_category)
-    {   
+    {
         return view('dashboard.pages.badge-categories.templates',['category'=>$badge_category, 'templates'=>$badge_category->templates]);
     }
 }

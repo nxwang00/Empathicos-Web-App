@@ -13,11 +13,11 @@ class Mainsubcat extends Model
      * @var array
      */
     protected $fillable = [
-        'cat_id','title', 'description','image'
+        'cat_id','title', 'description','image', 'is_mini_course'
     ];
-    
+
     protected $table = 'main_subcategories';
-     
+
     /**
      * The attributes that should be hidden for arrays.
      *

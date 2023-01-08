@@ -34,7 +34,7 @@
     <!-- /Page Alert -->
     <!-- Page Content -->
     <div class="row">
-        
+
         <div class="col-md-12">
             <div class="card mb-0">
                <form method="post"  class="form-horizontal create-category" id="create-category" enctype="multipart/form-data" action="{{ route('admin.main-categories.update')}}" data-table='categories_table'>
@@ -46,11 +46,15 @@
                                <div class="form-group">
                                     <label for="title">Title</label><i class="text-danger">*</i>
                                     <input class="form-control" placeholder="Enter title here..." name="title" type="text" id="title" value="{{$data->title}}">
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label><i class="text-danger">*</i>
                                     <textarea class="form-control" placeholder="Enter description here..." rows="5" name="description" cols="50" id="description" style="visibility: hidden; display: none;">{{$data->description}}</textarea>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="entermagicdoor" name="entermagicdoor" @if ($data->is_enter_magic_door) checked @endif>
+                                    <label class="form-check-label" for="entermagicdoor">Is Enter Magic Door</label>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +75,7 @@
 @section('page-js-link')
 <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 @endsection
-@section('page-js') 
+@section('page-js')
 <script>
         CKEDITOR.replace( 'description' );
 </script>

@@ -52,6 +52,10 @@
                                     {{ Form::textarea('description',null, array('class' => error_field($errors,'description'),'placeholder'=>'Enter description here...','rows'=>'5')) }}
                                     {!!error_msg($errors,'description')!!}
                                 </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="entermagicdoor" name="entermagicdoor">
+                                    <label class="form-check-label" for="entermagicdoor">Is Enter Magic Door</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,7 +73,7 @@
 @section('page-js-link')
 <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 @endsection
-@section('page-js') 
+@section('page-js')
 <script>
         CKEDITOR.replace( 'description' );
 </script>

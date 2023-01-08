@@ -13,11 +13,11 @@ class Maincat extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description'
+        'title', 'description', 'is_enter_magic_door'
     ];
-    
+
     protected $table = 'main_categories';
-     
+
     /**
      * The attributes that should be hidden for arrays.
      *

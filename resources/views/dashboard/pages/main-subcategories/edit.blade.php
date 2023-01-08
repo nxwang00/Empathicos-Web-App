@@ -34,7 +34,7 @@
     <!-- /Page Alert -->
     <!-- Page Content -->
     <div class="row">
-        
+
         <div class="col-md-12">
             <div class="card mb-0">
                <form method="post"  class="form-horizontal create-category" id="create-category" enctype="multipart/form-data" action="{{ route('admin.main-subcategories.updatedata')}}" data-table='categories_table'>
@@ -49,7 +49,7 @@
                                         <option value="" readonly>---- Choose main Category ----</option>
                                         @if(isset($categories) && !empty($categories) )
                                             @foreach($categories as $mc)
-                                            
+
                                                 <option value="{{$mc->id}}" @if($data->cat_id == $mc->id)
                                                         selected
                                                     @endif>
@@ -61,19 +61,22 @@
                                <div class="form-group">
                                     <label for="title">Title</label><i class="text-danger">*</i>
                                     <input class="form-control" placeholder="Enter title here..." name="title" type="text" id="title" value="{{$data->title}}">
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label><i class="text-danger">*</i>
                                     <textarea class="form-control" placeholder="Enter description here..." rows="5" name="description" cols="50" id="description" style="visibility: hidden; display: none;">{{$data->description}}</textarea>
                                 </div>
                                 @if(!empty($data->image))
-                                <img src="{{asset('project/storage/app/public/main-subcategories/'.$data->image)}}" width="200">
+                                <img src="{{asset('/storage/main-subcategories/'.$data->image)}}" width="200">
                                 @endif
                                 <div class="form-group">
                                     <label for="card_pic">Select Image</label>
                                     <input type="file" class="form-control" name="image" id="image">
-                                    
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="minicourse" name="minicourse" @if ($data->is_mini_course) checked @endif>
+                                    <label class="form-check-label" for="minicourse">Is Mini Course</label>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +97,7 @@
 @section('page-js-link')
 <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 @endsection
-@section('page-js') 
+@section('page-js')
 <script>
         CKEDITOR.replace( 'description' );
 </script>

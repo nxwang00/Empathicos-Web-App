@@ -48,13 +48,13 @@
                                         <option readonly>---- Choose main Category ----</option>
                                         @if(isset($mainCat) && !empty($mainCat) )
                                             @foreach($mainCat as $mc)
-                                            
+
                                                 <option value="{{$mc->id}}">{{$mc->title}}</option>
                                             @endforeach
                                         @endif
                                     </select>
                                 </div>
-                               
+
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
@@ -70,10 +70,13 @@
                                 <div class="form-group">
                                     <label for="card_pic">Select Image</label>
                                     <input type="file" class="form-control" name="image" id="image">
-                                    
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="minicourse" name="minicourse">
+                                    <label class="form-check-label" for="minicourse">Is Mini Course</label>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="card-footer">
@@ -90,7 +93,7 @@
 @section('page-js-link')
 <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 @endsection
-@section('page-js') 
+@section('page-js')
 <script>
         CKEDITOR.replace( 'description' );
 </script>

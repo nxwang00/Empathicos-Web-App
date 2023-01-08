@@ -23,15 +23,15 @@ class MainCategoryController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-   
+
                             // $btn = viewButton('admin.main-categories', $row);
                             $btn = editButton('admin.main-categories', $row);
                             $btn .= trashButton('admin.main-categories', $row);
                             return $btn;
                     })
                     ->addColumn('description', function($row){
-   
-                           
+
+
                             return strip_tags($row->description);
                     })
                     ->rawColumns(['action','description'])
@@ -50,30 +50,40 @@ class MainCategoryController extends Controller
     {
         if($request->title == ""){
             flashWebResponse('error','Please enter the title');
-            return redirect()->back(); 
+            return redirect()->back();
         }
-        
+
         $title = $request->title;
         $description = $request->description;
-        
+        $entermagicdoor = $request->entermagicdoor;
+
         $already = MainCat::where('title', $title)->first();
         if($already){
             flashWebResponse('error','The title already exists');
-            return redirect()->back(); 
+            return redirect()->back();
         }
-        
+
         $mainCat = new Maincat();
         $mainCat->title = $title;
         $mainCat->description = $description;
+        if (!is_null($entermagicdoor)) {
+            $already = MainCat::where('is_enter_magic_door', 1)->first();
+            if($already){
+                flashWebResponse('error','The category for entering magic door already exists');
+                return redirect()->back();
+            }
+            $mainCat->is_enter_magic_door = true;
+        }
+
         $saveData = $mainCat->save();
         if($saveData){
             flashWebResponse('created', 'Main category');
-            return redirect()->route('admin.main-categories.index');  
+            return redirect()->route('admin.main-categories.index');
         }
-        
+
         flashWebResponse('error','Data not saved');
-        return redirect()->back(); 
-        
+        return redirect()->back();
+
     }
 
     public function show(ShowRequest $request, BadgeCategory $badge_category)
@@ -92,19 +102,30 @@ class MainCategoryController extends Controller
         $mainCat = MainCat::findOrFail($request->id);
         $mainCat->title = $request->title;
         $mainCat->description = $request->description;
+        if (!is_null($request->entermagicdoor)) {
+            $already = MainCat::where('is_enter_magic_door', 1)->where('id', '!=', $request->id)->first();
+            if($already){
+                flashWebResponse('error','The category for entering magic door already exists');
+                return redirect()->back();
+            }
+            $mainCat->is_enter_magic_door = true;
+        } else {
+            $mainCat->is_enter_magic_door = NULL;
+        }
+
         $saveData = $mainCat->save();
         if($saveData){
             flashWebResponse('updated', 'Main category');
-            return redirect()->route('admin.main-categories.index');  
+            return redirect()->route('admin.main-categories.index');
         }
-        
+
         flashWebResponse('error');
         return redirect()->back();
     }
 
     public function destroy($id)
     {
-        
+
         if (request()->ajax()) {
             $cat = MainCat::findOrFail($id);
             if($cat){
@@ -124,7 +145,7 @@ class MainCategoryController extends Controller
     }
 
     public function templates(Request $request, BadgeCategory $badge_category)
-    {   
+    {
         return view('dashboard.pages.badge-categories.templates',['category'=>$badge_category, 'templates'=>$badge_category->templates]);
     }
 }
