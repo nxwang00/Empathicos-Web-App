@@ -215,7 +215,15 @@ Route::group(['namespace' => 'Api\Store\v1', 'middleware' => 'auth:api', 'prefix
         Route::get('audio-course/by-category/{cat_id}', 'AudiocourseController@getCategoryCourses')->name('audiobycat.get');
     });
 
-
+    /**
+    |-----------------------------------------------
+    | Topic Routes.......
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Topic'], function () {
+        Route::get('topics/{cat_id}', 'TopicController@index')->name('topic.list');
+        Route::post('topics/entry/save', 'TopicController@saveEntry')->name('topic.save.entry');
+    });
 
 
 
