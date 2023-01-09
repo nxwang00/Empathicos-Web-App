@@ -538,7 +538,14 @@ Route::group(['namespace' => 'Web\Dashboard', 'middleware' => ['auth:admin'], 'p
         Route::post('audio-course-category/updatedata', 'AudiocategoryController@updatedata')->name('audio-course-category.updatedata');
     });
 
-
+    /**
+    |-----------------------------------------------
+    | Mini course Routes.......
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Minicourse'], function () {
+        Route::resource('mini-courses', 'MinicourseController');
+    });
 
 });
 

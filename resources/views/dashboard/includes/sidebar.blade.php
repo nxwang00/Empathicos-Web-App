@@ -41,7 +41,7 @@
                     </ul>
                 </li>
                 <li class="submenu" >
-                    <a href="#" {!!( request()->is('admin/topics/*') || request()->routeIs('admin.topics.index') || request()->routeIs('admin.topics.create')) ? 'class="subdrop"' : ''!!} ><i class="la la-leanpub"></i> <span> Topics </span> <span class="menu-arrow"></span></a>
+                    <a href="#" {!!( request()->is('admin/topics/*') || request()->routeIs('admin.topics.index') || request()->routeIs('admin.topics.create')) ? 'class="subdrop"' : ''!!} ><i class="la la-sticky-note"></i> <span> Topics </span> <span class="menu-arrow"></span></a>
                     <ul  {!!(request()->is('admin/topics/*') || is_route('admin.topics.index') || is_route('admin.topics.create')) ? 'style="display: block;"' : ''!!} >
                         <li {!! is_active('admin.topics.index') !!}>
                             <a href="{{route('admin.topics.index')}}"> All Topics </a>
@@ -77,7 +77,7 @@
                 <!--Audio Course--->
 
                 <li class="menu-title">
-                    <span>Audio Courses</span>
+                    <span>Courses</span>
                 </li>
                 <li  {!! is_active('admin.audio-course.index') !!}>
                     <a href="{{route('admin.audio-course.index')}}"><i class="la la-headphones"></i> <span>Audio Courses</span></a>
@@ -85,7 +85,9 @@
                 <li  {!! is_active('admin.audio-course-category.index') !!}>
                     <a href="{{route('admin.audio-course-category.index')}}"><i class="la la-sitemap"></i> <span> Audio Course Categories</span></a>
                 </li>
-
+                <li  {!! is_active('admin.mini-course.index') !!}>
+                    <a href="{{route('admin.mini-courses.index')}}"><i class="la la-leanpub"></i> <span>Mini Courses</span></a>
+                </li>
                 <!--Audio Course--->
 
 
