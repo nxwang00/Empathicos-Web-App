@@ -215,6 +215,24 @@ Route::group(['namespace' => 'Api\Store\v1', 'middleware' => 'auth:api', 'prefix
         Route::get('audio-course/by-category/{cat_id}', 'AudiocourseController@getCategoryCourses')->name('audiobycat.get');
     });
 
+     /**
+    |-----------------------------------------------
+    | Mini course........
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Minicourse'], function () {
+        Route::get('mini-courses/{cat_id}', 'MinicourseController@getCourses')->name('minibycat.get');
+    });
+
+     /**
+    |-----------------------------------------------
+    | User Journal........
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Journal'], function () {
+        Route::post('journal/save', 'JournalController@save')->name('journal.save');
+    });
+
     /**
     |-----------------------------------------------
     | Topic Routes.......
