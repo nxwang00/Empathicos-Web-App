@@ -243,6 +243,15 @@ Route::group(['namespace' => 'Api\Store\v1', 'middleware' => 'auth:api', 'prefix
         Route::post('topics/entry/save', 'TopicController@saveEntry')->name('topic.save.entry');
     });
 
+    /**
+    |-----------------------------------------------
+    | Ask Ana Routes.......
+    |-----------------------------------------------
+     */
+    Route::group(['namespace' => 'Question'], function () {
+        Route::post('questions/ask-ana', 'QuestionController@index')->name('ask.ana.question');
+    });
+
 
 
     // /**
