@@ -139,7 +139,8 @@ Route::group(['namespace' => 'Api\Store\v1', 'middleware' => 'auth:api', 'prefix
     |-----------------------------------------------
      */
     Route::group(['namespace' => 'Product'], function () {
-        Route::apiResource('products', 'ProductController')->only('index','show');
+        // Route::apiResource('products', 'ProductController')->only('index','show');
+        Route::get('products','ProductController@index');
     });
 
     /**

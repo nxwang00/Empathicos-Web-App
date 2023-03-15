@@ -11,7 +11,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = [ 
+    protected $fillable = [
         'name','price','description','categories','image','status'
     ];
 
@@ -34,7 +34,7 @@ class Product extends Model
     ];
 
 
-    
+
     /**
      * Get the product created at.
      *
@@ -60,12 +60,11 @@ class Product extends Model
 
     public function reviews()
     {
-        return $this->hasMany('App\Review', 'product_id')->where('status',1); 
+        return $this->hasMany('App\Review', 'product_id')->where('status',1);
     }
 
     public function getAveragereviews()
     {
         return $this->reviews()->average('rating');
     }
-
 }
